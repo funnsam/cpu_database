@@ -9,7 +9,7 @@ replace github.com/funnsam/cpu_db/reader => ../reader
 require (
 	cloud.google.com/go/compute v1.19.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	github.com/funnsam/cpu_db/reader v0.0.0-20230622104258-6e9f7634a0e6 // indirect
+	github.com/funnsam/cpu_db/reader v0.0.0-20230622110429-18e588165a35 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/s2a-go v0.1.4 // indirect
