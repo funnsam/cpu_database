@@ -19,6 +19,7 @@ type CPUData struct {
 	iw_bits 	uint64
 	image 		string
 	video 		string
+	isa 		string
 	description string
 }
 
@@ -27,6 +28,7 @@ func ReadDatabase() (*[]CPUData, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	r := csv.NewReader(strings.NewReader(*db_raw))
 	_, _ = r.Read() // HACK: ignore first row
 
@@ -54,7 +56,7 @@ func ReadDatabase() (*[]CPUData, error) {
 
 func dataFromStrings(strs []string) (*CPUData, error) {
 	if len(strs) < 12 {
-		return nil, fmt.Errorf("Not enough fields")
+		return nil, fmt.Errorf("Not enough fields, only got %v (%v)", len(strs), strs)
 	}
 	d := CPUData {}
 
@@ -75,7 +77,8 @@ func dataFromStrings(strs []string) (*CPUData, error) {
 	d.iw_bits 	= iw   		// 7
 	d.image 	= strs[8]
 	d.video 	= strs[9]
-	d.image 	= strs[10]
+	d.isa 		= strs[10]
+	d.description = strs[11]
 
 	return &d, nil
 }

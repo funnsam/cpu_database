@@ -87,13 +87,9 @@ func ReadDatabaseContent() (*string, error) {
 	}
 	for _, i := range r.Files {
 		if i.Name == "CPUDatabase.csv" {
-			info, err := srv.Files.Get(i.Id).Fields("webContentLink").Do()
+			resp, err := srv.Files.Export(i.Id, "text/csv").Download()
 			if err != nil {
-				return nil, fmt.Errorf("Unable to retrieve file info: %v", err)
-			}
-			resp, err := http.Get(info.WebContentLink)
-			if err != nil {
-				return nil, fmt.Errorf("Unable to retrieve file content: %v", err)
+				return nil, fmt.Errorf("Unable to retrieve file: %v", err)
 			}
 			defer resp.Body.Close()
 			body, err := io.ReadAll(resp.Body)
