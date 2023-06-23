@@ -1,4 +1,4 @@
-package cpu_database_reader
+package reader
 
 import (
 	"encoding/csv"
@@ -9,18 +9,19 @@ import (
 )
 
 type CPUData struct {
-	name 		string
-	author 		string
-	speed 		float64
-	registers  	uint64
-	ram 		uint64
-	rom 		uint64
-	dw_bits 	uint64
-	iw_bits 	uint64
-	image 		string
-	video 		string
-	isa 		string
-	description string
+	Name 		string
+	Author 		string
+	Speed 		float64
+	Pipeline  	uint64
+	Registers  	uint64
+	RAM 		uint64
+	ROM 		uint64
+	DWBits 		uint64
+	IWBits 		uint64
+	Image 		string
+	Video 		string
+	ISA 		string
+	Description string
 }
 
 func ReadDatabase() (*[]CPUData, error) {
@@ -55,30 +56,32 @@ func ReadDatabase() (*[]CPUData, error) {
 }
 
 func dataFromStrings(strs []string) (*CPUData, error) {
-	if len(strs) < 12 {
+	if len(strs) < 13 {
 		return nil, fmt.Errorf("Not enough fields, only got %v (%v)", len(strs), strs)
 	}
 	d := CPUData {}
 
 	speed, _ 	:= strconv.ParseFloat(strs[2], 64)
-	regs, _  	:= strconv.ParseUint(strs[3], 10, 64)
-	ram, _  	:= strconv.ParseUint(strs[4], 10, 64)
-	rom, _  	:= strconv.ParseUint(strs[5], 10, 64)
-	dw, _  		:= strconv.ParseUint(strs[6], 10, 64)
-	iw, _  		:= strconv.ParseUint(strs[7], 10, 64)
+	pipe, _  	:= strconv.ParseUint(strs[3], 10, 64)
+	regs, _  	:= strconv.ParseUint(strs[4], 10, 64)
+	ram, _  	:= strconv.ParseUint(strs[5], 10, 64)
+	rom, _  	:= strconv.ParseUint(strs[6], 10, 64)
+	dw, _  		:= strconv.ParseUint(strs[7], 10, 64)
+	iw, _  		:= strconv.ParseUint(strs[8], 10, 64)
 
-	d.name 		= strs[0]
-	d.author 	= strs[1]
-	d.speed 	= speed 	// 2
-	d.registers = regs 		// 3
-	d.ram 		= ram 		// 4
-	d.rom 		= rom 		// 5
-	d.dw_bits 	= dw 		// 6
-	d.iw_bits 	= iw   		// 7
-	d.image 	= strs[8]
-	d.video 	= strs[9]
-	d.isa 		= strs[10]
-	d.description = strs[11]
+	d.Name 		= strs[0]
+	d.Author 	= strs[1]
+	d.Speed 	= speed 	// 2
+	d.Pipeline  = pipe 		// 3
+	d.Registers = regs 		// 4
+	d.RAM 		= ram 		// 5
+	d.ROM 		= rom 		// 6
+	d.DWBits 	= dw 		// 7
+	d.IWBits 	= iw   		// 8
+	d.Image 	= strs[9]
+	d.Video 	= strs[10]
+	d.ISA 		= strs[11]
+	d.Description = strs[12]
 
 	return &d, nil
 }

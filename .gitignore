@@ -3,3 +3,4 @@ go.sum
 go.work.sum
 token.json
 *.exe
+main
