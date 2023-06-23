@@ -30,6 +30,11 @@ func main() {
 	details := tview.NewTextView()
 	_, _, w, h := pages.GetInnerRect()
 
+	list.SetHighlightFullLine(true)
+	list.SetMainTextStyle(tcell.StyleDefault.Attributes(tcell.AttrBold))
+	list.SetMainTextColor(tcell.ColorWhite)
+	list.SetSecondaryTextColor(tcell.NewHexColor(0xBFBFBF))
+
 	details.SetBorder(true)
 	details.SetDynamicColors(true)
 
@@ -60,7 +65,7 @@ func main() {
 			fmt.Fprintf(w, "%sPipeline stages:%s %s%d%s\n", ns, ne, fs, d.Pipeline, fe)
 		}
 		if d.Registers != 0 {
-			fmt.Fprintf(w, "%sRegisters:%s %s%d Hz%s\n", ns, ne, fs, d.Registers, fe)
+			fmt.Fprintf(w, "%sRegisters:%s %s%d%s\n", ns, ne, fs, d.Registers, fe)
 		}
 		fmt.Fprintf(w, "%sRAM Size:%s %s%d words%s\n", ns, ne, fs, d.RAM, fe)
 		fmt.Fprintf(w, "%sROM Size:%s %s%d words%s\n", ns, ne, fs, d.ROM, fe)

@@ -6,7 +6,7 @@ replace github.com/funnsam/cpu_db => ../
 
 replace github.com/funnsam/cpu_db/reader => ../reader
 
-require github.com/funnsam/cpu_db/reader v0.0.0-20230622111218-17e2d2c34ea5
+require github.com/funnsam/cpu_db/reader v0.0.0-20230623083833-9cbbc4b27867
 
 require (
 	github.com/gdamore/encoding v1.0.0 // indirect
